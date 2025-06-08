@@ -8,34 +8,46 @@ import vertexShader from "@/materials/sky/vertex.glsl?raw";
 import fragmentShader from "@/materials/sky/fragment.glsl?raw";
 
 const Sky = () => {
-  const { colorBottom, colorTop, colorMiddle, blendMiddle, blendIntensity } =
-    useControls(
-      "Sky 🌄",
-      {
-        colorTop: "#0e1c3e",
-        colorMiddle: "#ffa200",
-        colorBottom: "#160c2a",
-        blendMiddle: {
-          value: 0.2,
-          min: 0,
-          max: 1,
-          step: 0.01,
-        },
-        blendIntensity: {
-          value: 0.06,
-          min: 0,
-          max: 1,
-          step: 0.01,
-        },
+  const {
+    colorBottom,
+    colorTop,
+    colorMiddle,
+    blendMiddle,
+    blendIntensity,
+    radius,
+  } = useControls(
+    "Sky 🌄",
+    {
+      colorTop: "#0e1c3e",
+      colorMiddle: "#ffa200",
+      colorBottom: "#160c2a",
+      radius: {
+        value: 250,
+        min: 100,
+        max: 300,
+        step: 1,
       },
-      {
-        collapsed: true,
-      }
-    );
+      blendMiddle: {
+        value: 0.2,
+        min: 0,
+        max: 1,
+        step: 0.01,
+      },
+      blendIntensity: {
+        value: 0.06,
+        min: 0,
+        max: 1,
+        step: 0.01,
+      },
+    },
+    {
+      collapsed: true,
+    }
+  );
 
   return (
     <mesh rotation-x={degToRad(-5)}>
-      <sphereGeometry args={[200, 64, 64]} />
+      <sphereGeometry args={[radius, 64, 64]} />
       <skyMaterial
         side={THREE.BackSide}
         toneMapped={false}
